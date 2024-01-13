@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.areebgroup.todolist.data.source.local.model.TodoItem
 import kotlinx.coroutines.flow.Flow
+import java.util.Date
 
 @Dao
 interface TodoDao {
@@ -25,4 +26,11 @@ interface TodoDao {
 
     @Query("DELETE FROM todo_list WHERE id = :id")
     suspend fun deleteTask(id: Int)
+
+    @Query("SELECT * FROM todo_list WHERE taskDate = :date ORDER BY taskDate ASC")
+    suspend fun getTodoItemsFilteredByDateAscending(date: Date): Flow<List<TodoItem>>
+
+    @Query("SELECT * FROM todo_list WHERE taskDate = :date ORDER BY taskDate DESC")
+    suspend fun getTodoItemsFilteredByDateDescending(date: Date): Flow<List<TodoItem>>
+
 }

@@ -4,6 +4,7 @@ import com.areebgroup.todolist.data.source.local.dao.TodoDao
 import com.areebgroup.todolist.data.source.local.model.TodoItem
 import com.areebgroup.todolist.domain.repository.TodoRepository
 import kotlinx.coroutines.flow.Flow
+import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,4 +27,11 @@ class TodoRepositoryImp @Inject constructor(
 
     override suspend fun markTaskCompleted(id: Int, status: Boolean) =
         todoDao.markTaskCompleted(id, status)
+
+    override suspend fun getTodoItemsFilteredByDateAscending(date: Date) =
+        todoDao.getTodoItemsFilteredByDateAscending(date)
+
+    override suspend fun getTodoItemsFilteredByDateDescending(date: Date) =
+        todoDao.getTodoItemsFilteredByDateDescending(date)
+
 }
